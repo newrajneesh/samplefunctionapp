@@ -14,7 +14,8 @@ namespace localfuncProj
     {
         [FunctionName("HttpExample")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, [Queue("outqueue"), StorageAccount("AzureWebJobsStorage")] ICollector<string> msg,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+             [Queue("outqueue"), StorageAccount("AzureWebJobsStorage")] ICollector<string> msg,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -31,7 +32,7 @@ namespace localfuncProj
             }
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name} Dear. This HTTP triggered function executed successfully.";
+                : $"Hello, Dear {name}. This HTTP triggered function executed successfully.";
             log.LogInformation($"C# HTTP trigger function reponded with: Hello, {name}.");
             return new OkObjectResult(responseMessage);
         }
